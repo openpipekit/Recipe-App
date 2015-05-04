@@ -9,12 +9,13 @@ App.Views = App.Views || {};
 
         template: JST['app/scripts/templates/recipe.ejs'],
 
-        tagName: 'div',
+        tagName: 'form',
 
         className: 'recipe',
 
         events: {
-          'click button': 'bake'
+          'click button': 'bake',
+          'enter': 'bake'
         },
 
         initialize: function () {
@@ -30,7 +31,8 @@ App.Views = App.Views || {};
             this.model.fetch({dataType: 'text'})
         },
 
-        bake: function() {
+        bake: function(e) {
+          e.preventDefault()
           var ingredients = []
           console.log('Baking...')
           var $inputs = this.$el.find('input')
