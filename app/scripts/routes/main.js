@@ -12,10 +12,10 @@ App.Routers = App.Routers || {};
       },
 
       recipe: function(id) {
-        var recipe = new App.Models.Recipe({id: id})
-        var recipeView = new App.Views.Recipe({model: recipe})
-        $('.main').html(recipeView.el)
-        recipeView.render()
+        App.recipe = new App.Models.Recipe({id: id})
+        App.recipeView = new App.Views.Recipe({model: App.recipe})
+        $('.main').html(App.recipeView.el)
+        App.recipeView.render()
       }
 
     });

@@ -13,7 +13,9 @@ App.Views = App.Views || {};
 
         className: 'recipe',
 
-        events: {},
+        events: {
+          'click button': 'bake'
+        },
 
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
@@ -21,10 +23,25 @@ App.Views = App.Views || {};
 
         render: function () {
             this.model.on('sync', function() {
-                this.$el.html(this.template(this.model.toJSON()));
+                var vars = this.model.toJSON()
+                vars.ingredients = this.model.getIngredients()
+                this.$el.html(this.template(vars));
             }, this)
             this.model.fetch({dataType: 'text'})
+        },
+
+        bake: function() {
+          var ingredients = []
+          console.log('Baking...')
+          var $inputs = this.$el.find('input')
+          $inputs.each(function(key, $input) {
+            ingredients[$($input).attr('id')] = $($input).val()
+          })
+          var muffin = Mustache.render(this.model.get('recipe'), ingredients)
+          this.$el.find('.muffin input').val(muffin)
+          return muffin
         }
+
     });
 
 })();

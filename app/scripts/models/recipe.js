@@ -29,6 +29,18 @@ App.Models = App.Models || {};
         parse: function(response, options)  {
 
             return JSON.parse(response);
+        },
+
+        getIngredients: function() {
+          var ingredients = []
+          var tokens = (this.get('recipe')).match(/{{(.*?)}}/g)
+          tokens.forEach(function(token) {
+            token = token.substr(2, token.length)
+            token = token.substr(0, token.length-2)
+            ingredients.push(token)
+          })
+          return ingredients
+
         }
     });
 
