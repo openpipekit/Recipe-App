@@ -1,0 +1,8 @@
+{
+  "id": 1,
+  "authorId": "rjsteinert",
+  "statement": "On a Raspberry Pi, pull from temper1 temperature sensor and push to a phant database stream every number of seconds.",
+  "recipe": "{numberOne} + {numberTwo} = {numberThree}",
+  "bakingInstructions": "numberOne: The first number. \n numberTwo: The second number. \n numberThree: The third number.",
+  "installInstructions": "Add up the numbers, make sure the result is correct."
+}

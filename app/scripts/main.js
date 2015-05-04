@@ -9,6 +9,8 @@ window.App = {
     init: function () {
         'use strict';
         console.log('Hello from Backbone!');
+        var router = new App.Routers.Main()
+        Backbone.history.start()
     }
 };
 
