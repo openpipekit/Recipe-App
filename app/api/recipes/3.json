@@ -1,0 +1,9 @@
+{
+  "id": 3,
+  "authorId": "rjsteinert",
+  "statement": "On a Raspberry Pi, make a blink1 every {{number}} of seconds.",
+  "bakingInstructions": "wordOne: The first word. \n wordTwo: The second word. \n wordThree: The third word.",
+  "installInstructions": "Add up the words, make sure the result is correct.",
+  "recipe": "apt-get install -y libusb-1.0-0-dev; \\n\
+   \n cd /root {{yar}}   "
+}

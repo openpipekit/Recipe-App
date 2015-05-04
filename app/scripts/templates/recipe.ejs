@@ -1,18 +1,23 @@
-<div class="info">
-  Recipe #<%= id %> by <%= authorId %>
-</div>
+<h1>Recipe #<%= id %> by <%= authorId %></h1>
 
-<div class="statement">
+<p class="lead statement">
   <%= statement %>
-</div>
+</p>
 
 <div class="recipe">
-  <%= recipe %>
+  <div class="form-group">
+    <textarea class="form-control" rows="3" id="recipe" readonly><%= recipe %></textarea>
+  </div>
 </div>
 
 <div class="bake">
-  <p class="instructions"> <%= bakingInstructions %> </p>
+  <h2> Bake </h2>
+  <h3> Baking Instructions </h3>
+  <blockquote class="baking-instructions">
+    <p> <%= bakingInstructions %> </p>
+  </blockquote>
   <div class="baking-form">
+    <h3> Ingredients </h3>
     <div class="ingredients">
       <% _.forEach(ingredients, function(ingredient) { %>
       <div class="form-group">
@@ -26,8 +31,13 @@
 </div>
 
 <div class="muffin">
+  <h2> Muffin </h2>
   <div class="form-group">
-    <label for="muffin">Muffin</label>
-    <input type="textbox" class="form-control" id="muffin" placeholder="">
+    <textarea class="form-control" rows="3" id="muffin"></textarea>
   </div>
+  <h3> Install Instructions </h3>
+  <blockquote class="install-instructions">
+    <p> <%= installInstructions %> </p>
+  </blockquote>
+
 </div>

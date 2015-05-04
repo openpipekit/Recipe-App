@@ -1,8 +1,10 @@
 {
   "id": 1,
   "authorId": "rjsteinert",
-  "statement": "On a Raspberry Pi, pull from temper1 temperature sensor and push to a phant database stream every number of seconds.",
-  "recipe": "The {{wordOne}} {{wordTwo}} {{wordThree}}.",
-  "bakingInstructions": "numberOne: The first number. \n numberTwo: The second number. \n numberThree: The third number.",
-  "installInstructions": "Add up the numbers, make sure the result is correct."
+  "statement": "On a Raspberry Pi, pull from temper1 temperature sensor and push to a phant database stream every word of seconds.",
+  "recipe": [
+    "The {{wordOne}} {{wordTwo}} {{wordThree}}."
+  ],
+  "bakingInstructions": "wordOne: The first word. \n wordTwo: The second word. \n wordThree: The third word.",
+  "installInstructions": "Add up the words, make sure the result is correct."
 }

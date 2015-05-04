@@ -38,7 +38,7 @@ App.Views = App.Views || {};
             ingredients[$($input).attr('id')] = $($input).val()
           })
           var muffin = Mustache.render(this.model.get('recipe'), ingredients)
-          this.$el.find('.muffin input').val(muffin)
+          this.$el.find('.muffin textarea').text(muffin)
           return muffin
         }
 

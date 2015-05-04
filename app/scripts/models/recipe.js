@@ -27,8 +27,9 @@ App.Models = App.Models || {};
         },
 
         parse: function(response, options)  {
-
-            return JSON.parse(response);
+            var results = JSON.parse(response);
+            results.recipe = results.recipe.join('\n')
+            return results
         },
 
         getIngredients: function() {
