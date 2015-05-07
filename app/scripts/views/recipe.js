@@ -28,11 +28,11 @@ App.Views = App.Views || {};
                 vars.statement = this.getHtmlStatement()
                 this.$el.html(this.template(vars));
                 autosize(this.$el.find('textarea'))
-                this.$el.find('input').each(function(){
-                  $(this).keyup(function(){
-                    var size = parseInt($(this).attr('size'));
-                    var chars = $(this).val().length;
-                    if(chars >= size) $(this).attr('size', chars);
+                this.$el.find('.input').each(function(){
+                  $(this).css('min-width', $(this).width() + 'px')
+                  //debugger
+                  $(this).one('click', function() {
+                    $(this).text('')
                   })
                 });
             }, this)
@@ -46,7 +46,7 @@ App.Views = App.Views || {};
               if (token.substr(0, 2) == '{{') {
                 var name = (token.substr(2, token.length))
                 name = name.substr(0, name.length-2)
-                results += '<input class="form-control" style="width: auto; display: inline;" placeholder="' + token + '" data-name="' + name + '" size=' + token.length + '></input> '
+                results += '<span style="display: inline-block; padding: 5px;border: 1px solid #ccc; border-radius: 4px;" class="input" data-name="' + name + '" contentEditable=true> ' + token + '</span> '
               }
               else {
                 results += token + ' '
@@ -58,8 +58,8 @@ App.Views = App.Views || {};
         bake: function() {
           console.log('Baking.')
           var vars = {}
-          $('input').each(function($el) {
-            vars[$(this).attr('data-name')] = $(this).val()
+          this.$el.find('.input').each(function($el) {
+            vars[$(this).attr('data-name')] = $(this).text()
           })
           $('textarea').text(Mustache.render(this.model.get('recipe'), vars))
         }
