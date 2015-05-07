@@ -8,33 +8,6 @@
   <div class="form-group">
     <textarea class="form-control" rows="3" id="recipe" readonly><%= recipe %></textarea>
   </div>
-</div>
-
-<div class="bake">
-  <h2> Bake </h2>
-  <h3> Baking Instructions </h3>
-  <blockquote class="baking-instructions">
-    <p> <%= bakingInstructions %> </p>
-  </blockquote>
-  <div class="baking-form">
-    <h3> Ingredients </h3>
-    <div class="ingredients">
-      <% _.forEach(ingredients, function(ingredient) { %>
-      <div class="form-group">
-        <label for="<%= ingredient %>"><%= ingredient %></label>
-        <input type="text" class="form-control" id="<%= ingredient %>" placeholder="">
-      </div>
-      <% }) %>
-    </div>
-    <button type="submit" class="btn btn-default">Bake It</button>
-  </div>
-</div>
-
-<div class="muffin">
-  <h2> Muffin </h2>
-  <div class="form-group">
-    <textarea class="form-control" rows="3" id="muffin"></textarea>
-  </div>
   <h3> Install Instructions </h3>
   <blockquote class="install-instructions">
     <p> <%= installInstructions %> </p>

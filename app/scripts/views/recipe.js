@@ -15,7 +15,7 @@ App.Views = App.Views || {};
 
         events: {
           'click button': 'bake',
-          'enter': 'bake'
+          'keyup': 'bake'
         },
 
         initialize: function () {
@@ -25,23 +25,43 @@ App.Views = App.Views || {};
         render: function () {
             this.model.on('sync', function() {
                 var vars = this.model.toJSON()
-                vars.ingredients = this.model.getIngredients()
+                vars.statement = this.getHtmlStatement()
                 this.$el.html(this.template(vars));
+                autosize(this.$el.find('textarea'))
+                this.$el.find('input').each(function(){
+                  $(this).keyup(function(){
+                    var size = parseInt($(this).attr('size'));
+                    var chars = $(this).val().length;
+                    if(chars >= size) $(this).attr('size', chars);
+                  })
+                });
             }, this)
             this.model.fetch({dataType: 'text'})
         },
 
-        bake: function(e) {
-          e.preventDefault()
-          var ingredients = []
-          console.log('Baking...')
-          var $inputs = this.$el.find('input')
-          $inputs.each(function(key, $input) {
-            ingredients[$($input).attr('id')] = $($input).val()
+        getHtmlStatement: function() {
+            var results = ''
+            var tokens = (this.model.get('statement')).split(' ')
+            tokens.forEach(function(token) {
+              if (token.substr(0, 2) == '{{') {
+                var name = (token.substr(2, token.length))
+                name = name.substr(0, name.length-2)
+                results += '<input class="form-control" style="width: auto; display: inline;" placeholder="' + token + '" data-name="' + name + '" size=' + token.length + '></input> '
+              }
+              else {
+                results += token + ' '
+              }
+            })
+            return results
+        },
+
+        bake: function() {
+          console.log('Baking.')
+          var vars = {}
+          $('input').each(function($el) {
+            vars[$(this).attr('data-name')] = $(this).val()
           })
-          var muffin = Mustache.render(this.model.get('recipe'), ingredients)
-          this.$el.find('.muffin textarea').text(muffin)
-          return muffin
+          $('textarea').text(Mustache.render(this.model.get('recipe'), vars))
         }
 
     });
