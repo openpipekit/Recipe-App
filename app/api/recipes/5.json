@@ -15,7 +15,7 @@
     "touch autorun.sh", 
     "chmod 755 autorun.sh",
     "",
-    "echo 'watch -n{{number}} \"/root/blink1/commandline/blink1-tool --blink {{color}} 1\"' > /boot/autorun.sh ",
+    "echo 'watch -n{{number}} \"/root/blink1/commandline/blink1-tool --blink {{color}} \"' > /boot/autorun.sh ",
     "reboot" 
   ]
 }
