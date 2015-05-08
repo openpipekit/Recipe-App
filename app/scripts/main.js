@@ -16,7 +16,7 @@ window.App = {
     var router = new App.Routers.Main()
     Backbone.history.start()
   },
-  host: location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')
+  host: 'http://dev-mad-lib-robots.pantheon.io/'
 }
 
 $(document).ready(function () {
