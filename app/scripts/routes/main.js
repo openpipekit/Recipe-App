@@ -8,7 +8,8 @@ App.Routers = App.Routers || {};
     App.Routers.Main = Backbone.Router.extend({
 
       routes: {
-        'recipe/:id': 'recipe'
+        'recipe/:id': 'recipe',
+        'add': 'add'
       },
 
       recipe: function(id) {
@@ -16,6 +17,12 @@ App.Routers = App.Routers || {};
         App.recipeView = new App.Views.Recipe({model: App.recipe})
         $('.main').html(App.recipeView.el)
         App.recipeView.render()
+      },
+
+      add: function() {
+        $.get( "http://local.madlibrobots.com/?q=node/add/mad-lib&ajax=1", function( data ) {
+          $( ".main" ).html( data );
+        })
       }
 
     });

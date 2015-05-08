@@ -7,10 +7,16 @@ window.App = {
   Routers: {},
   init: function () {
     'use strict'
+    // Host overrrides for Development
+    //// Static API
+    //App.host = "http://localhost:9000"
+    //// Local Drupal
+    //App.host = "http://local.madlibrobots.com"
     console.log('Hello from Backbone!')
     var router = new App.Routers.Main()
     Backbone.history.start()
-  }
+  },
+  host: location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')
 }
 
 $(document).ready(function () {

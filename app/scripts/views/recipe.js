@@ -61,7 +61,7 @@ App.Views = App.Views || {};
           this.$el.find('.input').each(function($el) {
             vars[$(this).attr('data-name')] = $(this).text()
           })
-          $('textarea').text(Mustache.render(this.model.get('recipe'), vars))
+          $('textarea').text(Mustache.render(this.model.get('code'), vars))
         }
 
     });

@@ -1,4 +1,4 @@
-<h1>Recipe #<%= id %> by <%= authorId %></h1>
+<h1><%= title %></h1>
 
 <p class="lead statement">
   <%= statement %>
@@ -6,11 +6,11 @@
 
 <div class="recipe">
   <div class="form-group">
-    <textarea class="form-control" rows="3" id="recipe" readonly><%= recipe %></textarea>
+    <textarea class="form-control" rows="3" id="recipe" readonly><%= code %></textarea>
   </div>
-  <h3> Install Instructions </h3>
+  <h3> Read Me </h3>
   <blockquote class="install-instructions">
-    <p> <%= installInstructions %> </p>
+    <p> <%= readme %> </p>
   </blockquote>
 
 </div>

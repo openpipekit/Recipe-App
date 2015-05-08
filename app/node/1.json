@@ -1,9 +1,9 @@
 {
-  "id": 5,
-  "authorId": "rjsteinert",
-  "statement": "On a Raspberry Pi, make a blink1 LED blink {{color}} every {{number}} seconds.",
-  "installInstructions": "Save as `autorun.sh` and place on a Raspberry Pi's SD card.",
-  "recipe": [
+  "nid": 5,
+  "title": "Recipe #5 by rjsteinert",
+  "field_statement": "On a Raspberry Pi, make a blink1 LED blink {{color}} every {{number}} seconds.",
+  "field_readme": "Save as `autorun.sh` and place on a Raspberry Pi's SD card.",
+  "field_code": [
     "apt-get install -y libusb-1.0-0-dev", 
     "cd /root",
     "git clone https://github.com/todbot/blink1.git ",
@@ -17,5 +17,6 @@
     "",
     "echo 'watch -n{{number}} \"/root/blink1/commandline/blink1-tool --blink {{color}} \"' > /boot/autorun.sh ",
     "reboot" 
-  ]
+  ],
+  "field_tags": "raspberry-pi"
 }

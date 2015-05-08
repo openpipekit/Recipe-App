@@ -7,42 +7,56 @@ App.Models = App.Models || {};
 
     App.Models.Recipe = Backbone.Model.extend({
 
-        url: function() {
-          return '/api/recipes/' + this.id + '.json'
-        },
+      id: 'nid',
 
-        initialize: function() {
-        },
+      url: function() {
+        return App.host + '/node/' + this.id + '.json'
+      },
 
-        defaults: {
-          'authorId': '',
-          'statement': '',
-          'recipe': '',
-          'bakingInstructions': '',
-          'installInstructions':'',
-          'muffin': ''
-        },
+      initialize: function() {
+      },
 
-        validate: function(attrs, options) {
-        },
+      defaults: {
+        'authorId': '',
+        'statement': '',
+        'recipe': '',
+        'readme':'',
+        'tags': ''
+      },
 
-        parse: function(response, options)  {
-            var results = JSON.parse(response);
-            results.recipe = results.recipe.join('\n')
-            return results
-        },
+      validate: function(attrs, options) {
+      },
 
-        getIngredients: function() {
-          var ingredients = []
-          var tokens = (this.get('recipe')).match(/{{(.*?)}}/g)
-          tokens.forEach(function(token) {
-            token = token.substr(2, token.length)
-            token = token.substr(0, token.length-2)
-            ingredients.push(token)
-          })
-          return ingredients
-
+      parse: function(response, options)  {
+        // Static API support for multiline strings
+        var results = JSON.parse(response);
+        if (_.isArray(results.field_statement)) {
+          results.field_statement = results.field_statement.join('\n')
         }
+        if (_.isArray(results.field_code)) {
+          results.field_code = results.field_code.join('\n')
+        }
+        if (_.isArray(results.field_readme)) {
+          results.field_readme = results.field_readme.join('\n')
+        }
+        // Transform the Drupalisms to normalisms
+        results.statement = results.field_statement
+        results.code = results.field_code
+        results.readme = results.field_readme
+        return results
+      },
+
+      getIngredients: function() {
+        var ingredients = []
+        var tokens = (this.get('recipe')).match(/{{(.*?)}}/g)
+        tokens.forEach(function(token) {
+          token = token.substr(2, token.length)
+          token = token.substr(0, token.length-2)
+          ingredients.push(token)
+        })
+        return ingredients
+
+      }
     });
 
 })();
