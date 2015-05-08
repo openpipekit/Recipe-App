@@ -25,7 +25,7 @@ App.Views = App.Views || {};
         render: function () {
             this.model.on('sync', function() {
                 var vars = this.model.toJSON()
-                vars.statement = this.getHtmlStatement()
+                vars.field_statement = this.getHtmlStatement()
                 this.$el.html(this.template(vars));
                 autosize(this.$el.find('textarea'))
                 this.$el.find('.input').each(function(){
@@ -41,7 +41,7 @@ App.Views = App.Views || {};
 
         getHtmlStatement: function() {
             var results = ''
-            var tokens = (this.model.get('statement')).split(' ')
+            var tokens = (this.model.get('field_statement')).split(' ')
             tokens.forEach(function(token) {
               if (token.substr(0, 2) == '{{') {
                 var name = (token.substr(2, token.length))
@@ -61,7 +61,7 @@ App.Views = App.Views || {};
           this.$el.find('.input').each(function($el) {
             vars[$(this).attr('data-name')] = $(this).text()
           })
-          $('textarea').text(Mustache.render(this.model.get('code'), vars))
+          $('textarea').text(Mustache.render(this.model.get('field_code'), vars))
         }
 
     });

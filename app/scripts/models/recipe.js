@@ -17,11 +17,10 @@ App.Models = App.Models || {};
       },
 
       defaults: {
-        'authorId': '',
-        'statement': '',
-        'recipe': '',
-        'readme':'',
-        'tags': ''
+        'field_statement': '',
+        'field_code': '',
+        'field_readme':'',
+        'field_tags': ''
       },
 
       validate: function(attrs, options) {
@@ -39,10 +38,6 @@ App.Models = App.Models || {};
         if (_.isArray(results.field_readme)) {
           results.field_readme = results.field_readme.join('\n')
         }
-        // Transform the Drupalisms to normalisms
-        results.statement = results.field_statement
-        results.code = results.field_code
-        results.readme = results.field_readme
         return results
       },
 

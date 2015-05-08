@@ -16,18 +16,21 @@ window.App = {
     var router = new App.Routers.Main()
     Backbone.history.start()
   },
-  host: 'http://dev-mad-lib-robots.pantheon.io/'
+  host: 'http://dev-mad-lib-robots.pantheon.io'
 }
 
 $(document).ready(function () {
   'use strict'
+
   var proxiedSync = Backbone.sync
   Backbone.sync = function(method, model, options) {
     options || (options = {})
     if (!options.crossDomain) {
       options.crossDomain = true
+      options.dataType = 'text'
     }
     return proxiedSync(method, model, options)
   }
+
   App.init();
 })
