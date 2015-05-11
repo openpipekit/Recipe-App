@@ -14,7 +14,7 @@ App.Views = App.Views || {};
         className: 'recipe',
 
         events: {
-          'click button': 'bake',
+          'click .edit': 'edit',
           'keyup': 'bake'
         },
 
@@ -62,6 +62,10 @@ App.Views = App.Views || {};
             vars[$(this).attr('data-name')] = $(this).text()
           })
           $('textarea').text(Mustache.render(this.model.get('field_code'), vars))
+        },
+
+        edit: function() {
+          Backbone.history.navigate('/recipe/' + this.model.id + '/edit', {trigger: true})
         }
 
     });

@@ -8,22 +8,44 @@ App.Routers = App.Routers || {};
     App.Routers.Main = Backbone.Router.extend({
 
       routes: {
+        'recipe/add': 'recipeAdd',
+        'recipe/:id/edit': 'recipeEdit',
         'recipe/:id': 'recipe',
         'add': 'add'
       },
 
       recipe: function(id) {
-        App.recipe = new App.Models.Recipe({id: id})
+        App.recipe = new App.Models.Recipe({nid: id})
         App.recipeView = new App.Views.Recipe({model: App.recipe})
         $('.main').html(App.recipeView.el)
         App.recipeView.render()
       },
 
-      add: function() {
-        $.get( "http://local.madlibrobots.com/?q=node/add/mad-lib&ajax=1", function( data ) {
-          $( ".main" ).html( data );
+      recipeAdd: function() {
+        App.recipeForm = new App.Views.RecipeForm({
+          model: new App.Models.Recipe()
         })
+        App.recipeForm.render()
+        App.recipeForm.once('done', function() {
+          Backbone.history.navigate('recipe/' + App.recipeForm.model.id, {trigger: true})
+        }, this)
+        $('.main').html(App.recipeForm.el)
+      },
+      recipeEdit: function(id) {
+        var recipe = new App.Models.Recipe({nid: id})
+        recipe.once('sync', function() {
+          App.recipeForm = new App.Views.RecipeForm({
+            model: recipe
+          })
+          App.recipeForm.render()
+          App.recipeForm.once('done', function() {
+            Backbone.history.navigate('recipe/' + App.recipeForm.model.id, {trigger: true})
+          }, this)
+          $('.main').html(App.recipeForm.el)
+        })
+        recipe.fetch()
       }
+
 
     });
 

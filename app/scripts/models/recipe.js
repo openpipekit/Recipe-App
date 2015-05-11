@@ -7,10 +7,10 @@ App.Models = App.Models || {};
 
     App.Models.Recipe = Backbone.Model.extend({
 
-      id: 'nid',
+      idAttribute: 'nid',
 
       url: function() {
-        return App.host + '/node/' + this.id + '.json'
+        return App.host + '/api/recipe/' + this.id
       },
 
       initialize: function() {
@@ -20,7 +20,14 @@ App.Models = App.Models || {};
         'field_statement': '',
         'field_code': '',
         'field_readme':'',
-        'field_tags': ''
+        'field_tags': []
+      },
+
+      schema: {
+        'field_statement': 'TextArea',
+        'field_code': 'TextArea',
+        'field_readme':'TextArea',
+        'field_tags': {'type': 'Text', 'help':'A comma delimited list of tags.'}
       },
 
       validate: function(attrs, options) {

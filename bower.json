@@ -9,7 +9,7 @@
     "modernizr": "~2.7.1",
     "mustache": "~2.0.0",
     "autosize": "~3.0.4",
-    "backbone-forms": "~0.14.0"
+    "backbone-forms": "https://github.com/powmedia/backbone-forms.git#master"
   },
   "devDependencies": {}
 }
