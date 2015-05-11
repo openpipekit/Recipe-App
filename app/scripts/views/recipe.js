@@ -30,7 +30,6 @@ App.Views = App.Views || {};
                 autosize(this.$el.find('textarea'))
                 this.$el.find('.input').each(function(){
                   $(this).css('min-width', $(this).width() + 'px')
-                  //debugger
                   $(this).one('click', function() {
                     $(this).text('')
                   })
@@ -40,28 +39,38 @@ App.Views = App.Views || {};
         },
 
         getHtmlStatement: function() {
-            var results = ''
-            var tokens = (this.model.get('field_statement')).split(' ')
+            var statement = this.model.get('field_statement')
+            var tokens = []
+            var findToken = function(statement) {
+                var a = statement.indexOf('{{')
+                var b = statement.indexOf('}}')
+                tokens.push(statement.substr(a,b-a+2))
+                statement = statement.substr(b+2, statement.length)
+                if (statement.indexOf('{{') !== -1) {
+                    findToken(statement)
+                }
+            }
+            findToken(statement)
+            var statement = this.model.get('field_statement')
             tokens.forEach(function(token) {
-              if (token.substr(0, 2) == '{{') {
-                var name = (token.substr(2, token.length))
-                name = name.substr(0, name.length-2)
-                results += '<span style="display: inline-block; padding: 5px;border: 1px solid #ccc; border-radius: 4px;" class="input" data-name="' + name + '" contentEditable=true> ' + token + '</span> '
-              }
-              else {
-                results += token + ' '
-              }
+                var $el = '<span style="display: inline-block; padding: 5px;border: 1px solid #ccc; border-radius: 4px;" class="input" data-name="' + token + '" contentEditable=true>' + token + '</span> '
+                statement = statement.replace(token, $el)
             })
-            return results
+            return statement
         },
 
         bake: function() {
           console.log('Baking.')
-          var vars = {}
+          var tokens = []
           this.$el.find('.input').each(function($el) {
-            vars[$(this).attr('data-name')] = $(this).text()
+            tokens.push([$(this).attr('data-name'), $(this).text()])
           })
-          $('textarea').text(Mustache.render(this.model.get('field_code'), vars))
+          var code = this.model.get('field_code')
+          tokens.forEach(function(token) {
+            code = code.replace(token[0], token[1])
+          })
+
+          $('textarea').text(code)
         },
 
         edit: function() {
