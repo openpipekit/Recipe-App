@@ -35,17 +35,22 @@ App.Models = App.Models || {};
 
       parse: function(response, options)  {
         // Static API support for multiline strings
-        var results = JSON.parse(response);
-        if (_.isArray(results.field_statement)) {
-          results.field_statement = results.field_statement.join('\n')
+        if (_.isObject(response)) {
+          return response
         }
-        if (_.isArray(results.field_code)) {
-          results.field_code = results.field_code.join('\n')
+        else {
+          var results = JSON.parse(response);
+          if (_.isArray(results.field_statement)) {
+            results.field_statement = results.field_statement.join('\n')
+          }
+          if (_.isArray(results.field_code)) {
+            results.field_code = results.field_code.join('\n')
+          }
+          if (_.isArray(results.field_readme)) {
+            results.field_readme = results.field_readme.join('\n')
+          }
+          return results
         }
-        if (_.isArray(results.field_readme)) {
-          results.field_readme = results.field_readme.join('\n')
-        }
-        return results
       },
 
       getIngredients: function() {

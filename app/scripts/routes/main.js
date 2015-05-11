@@ -11,7 +11,7 @@ App.Routers = App.Routers || {};
         'recipe/add': 'recipeAdd',
         'recipe/:id/edit': 'recipeEdit',
         'recipe/:id': 'recipe',
-        'add': 'add'
+        'search': 'search'
       },
 
       recipe: function(id) {
@@ -31,6 +31,7 @@ App.Routers = App.Routers || {};
         }, this)
         $('.main').html(App.recipeForm.el)
       },
+
       recipeEdit: function(id) {
         var recipe = new App.Models.Recipe({nid: id})
         recipe.once('sync', function() {
@@ -44,6 +45,13 @@ App.Routers = App.Routers || {};
           $('.main').html(App.recipeForm.el)
         })
         recipe.fetch()
+      },
+
+      search: function() {
+        var recipes = new App.Collections.Recipes()
+        var recipesView = new App.Views.Recipes({collection: recipes})
+        $('.main').html(recipesView.el)
+        recipesView.render()
       }
 
 
