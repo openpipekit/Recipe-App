@@ -11,8 +11,7 @@ window.App = {
     //// Static API
     //App.host = "http://localhost:9000"
     //// Local Drupal
-    App.host = "http://local.madlibrobots.com"
-    console.log('Hello from Backbone!')
+    //App.host = "http://local.madlibrobots.com"
     var router = new App.Routers.Main()
     Backbone.history.start()
   },
