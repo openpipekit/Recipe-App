@@ -27,6 +27,9 @@ $(document).ready(function () {
     if (!options.crossDomain) {
       options.crossDomain = true
       options.dataType = 'text'
+      if (!options.xhrFields) {
+        options.xhrFields = {withCredentials:true};
+      }
     }
     return proxiedSync(method, model, options)
   }
