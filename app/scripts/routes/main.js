@@ -12,6 +12,7 @@ App.Routers = App.Routers || {};
         'recipe/add': 'recipeAdd',
         'recipe/:id/edit': 'recipeEdit',
         'recipe/:id': 'recipe',
+        'login/register': 'loginRegister',
         'search': 'search'
       },
 
@@ -57,6 +58,14 @@ App.Routers = App.Routers || {};
         var recipesView = new App.Views.Recipes({collection: recipes})
         $('.main').html(recipesView.el)
         recipesView.render()
+      },
+
+      loginRegister: function() {
+        var loginRegisterView = new App.Views.LoginRegister({
+          model: new App.Models.LoginRegister()
+        })
+        $('.main').html(loginRegisterView.el)
+        loginRegisterView.render()
       }
 
 
