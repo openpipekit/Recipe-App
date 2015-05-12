@@ -12,7 +12,11 @@ window.App = {
     //App.host = "http://localhost:9000"
     //// Local Drupal
     //App.host = "http://local.madlibrobots.com"
+    App.user = new App.Models.WhoAmI()
     var router = new App.Routers.Main()
+    var badgeView = new App.Views.Badge({model: App.user})
+    $('.header').prepend(badgeView.el)
+    badgeView.render()
     Backbone.history.start()
   },
   host: 'http://dev-mad-lib-robots.pantheon.io'
@@ -27,9 +31,9 @@ $(document).ready(function () {
     if (!options.crossDomain) {
       options.crossDomain = true
       options.dataType = 'text'
-      if (!options.xhrFields) {
-        options.xhrFields = {withCredentials:true};
-      }
+    }
+    if (!options.xhrFields) {
+      options.xhrFields = {withCredentials:true};
     }
     return proxiedSync(method, model, options)
   }

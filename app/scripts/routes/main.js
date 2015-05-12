@@ -8,10 +8,15 @@ App.Routers = App.Routers || {};
     App.Routers.Main = Backbone.Router.extend({
 
       routes: {
+        '': 'home',
         'recipe/add': 'recipeAdd',
         'recipe/:id/edit': 'recipeEdit',
         'recipe/:id': 'recipe',
         'search': 'search'
+      },
+
+      home: function() {
+        Backbone.history.navigate('search', {trigger: true})
       },
 
       recipe: function(id) {
