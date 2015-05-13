@@ -52,7 +52,9 @@ App.Views = App.Views || {};
                     findToken(statement)
                 }
             }
-            findToken(statement)
+            if (statement.indexOf('{{') !== -1) {
+              findToken(statement)
+            }
             var statement = this.model.get('field_statement')
             tokens.forEach(function(token) {
                 var $el = '<span style="display: inline-block; padding: 5px;border: 1px solid #ccc; border-radius: 4px;" class="input" data-name="' + token + '" contentEditable=true>' + token + '</span> '
