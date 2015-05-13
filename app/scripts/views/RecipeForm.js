@@ -14,6 +14,7 @@ App.Views = App.Views || {};
         },
 
         initialize: function () {
+          this.$el.hide()
           this.listenTo(this.model, 'change', this.render);
         },
 
@@ -21,6 +22,7 @@ App.Views = App.Views || {};
           this.form = new Backbone.Form({model: this.model, submitButton: "save"})
           this.form.render()
           this.$el.html(this.form.el)
+          this.$el.fadeIn()
         },
 
         submit: function(e) {

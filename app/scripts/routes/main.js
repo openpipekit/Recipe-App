@@ -39,19 +39,17 @@ App.Routers = App.Routers || {};
         App.recipeForm.render()
       },
 
-      recipeEdit: function(id) {
-        var recipe = new App.Models.Recipe({nid: id})
-        recipe.once('sync', function() {
-          App.recipeForm = new App.Views.RecipeForm({
-            model: recipe
-          })
-          App.recipeForm.render()
-          App.recipeForm.once('done', function() {
+      recipeEdit: function(nid) {
+        App.recipeForm = new App.Views.RecipeForm({
+          model: new App.Models.Recipe({nid: nid})
+        })
+        App.recipeForm.model.once('sync', function() {
+          App.recipeForm.model.once('sync', function() {
             Backbone.history.navigate('recipe/' + App.recipeForm.model.id, {trigger: true})
           }, this)
-          $('.main').html(App.recipeForm.el)
-        })
-        recipe.fetch()
+        }, this)
+        $('.main').html(App.recipeForm.el)
+        App.recipeForm.model.fetch()
       },
 
       search: function() {

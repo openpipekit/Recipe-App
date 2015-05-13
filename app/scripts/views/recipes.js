@@ -20,6 +20,7 @@ App.Views = App.Views || {};
         events: {},
 
         initialize: function () {
+          this.$el.hide()
           this.listenTo(this.collection, 'change', this.render);
         },
 
@@ -31,6 +32,7 @@ App.Views = App.Views || {};
               view.$el.append(itemView.el)
               itemView.render()
             })
+            view.$el.fadeIn()
           })
           this.collection.fetch()
         }
