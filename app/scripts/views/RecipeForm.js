@@ -10,24 +10,22 @@ App.Views = App.Views || {};
         className: 'recipe-form',
 
         events: {
-          'click .submit': 'submit'
+          'click button': 'submit'
+        },
+
+        initialize: function () {
+          this.listenTo(this.model, 'change', this.render);
         },
 
         render: function () {
           this.form = new Backbone.Form({model: this.model, submitButton: "save"})
-          this.form.on('submit', function(e) {
-            e.preventDefault()
-            this.submit()
-          }, this)
           this.form.render()
-          this.$el.append(this.form.el)
+          this.$el.html(this.form.el)
         },
 
-        submit: function() {
+        submit: function(e) {
+          e.preventDefault()
           this.form.commit()
-          this.model.on('sync', function() {
-            this.trigger('done')
-          }, this)
           this.model.save()
         }
 

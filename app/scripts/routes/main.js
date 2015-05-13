@@ -32,11 +32,11 @@ App.Routers = App.Routers || {};
         App.recipeForm = new App.Views.RecipeForm({
           model: new App.Models.Recipe()
         })
-        App.recipeForm.render()
-        App.recipeForm.once('done', function() {
+        App.recipeForm.model.once('sync', function() {
           Backbone.history.navigate('recipe/' + App.recipeForm.model.id, {trigger: true})
         }, this)
         $('.main').html(App.recipeForm.el)
+        App.recipeForm.render()
       },
 
       recipeEdit: function(id) {
