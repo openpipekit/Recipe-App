@@ -10,7 +10,7 @@ App.Views = App.Views || {};
         className: 'recipe-form',
 
         events: {
-          'click button': 'submit'
+          'click button[type=submit]': 'submit'
         },
 
         initialize: function () {

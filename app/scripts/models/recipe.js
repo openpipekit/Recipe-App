@@ -27,7 +27,7 @@ App.Models = App.Models || {};
         'field_statement': { title: 'Statement', type: 'TextArea'},
         'field_code': {title: 'Code', type: 'TextArea'},
         'field_readme':{title: 'Read me', type: 'TextArea'},
-        'field_tags': {title: 'Tags', 'type': 'Text', 'help':'A comma delimited list of tags.'}
+        'field_tags': {title: 'Tags', 'type': 'List', 'help':'A comma delimited list of tags.'}
       },
 
       validate: function(attrs, options) {
