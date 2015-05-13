@@ -24,10 +24,10 @@ App.Models = App.Models || {};
       },
 
       schema: {
-        'field_statement': 'TextArea',
-        'field_code': 'TextArea',
-        'field_readme':'TextArea',
-        'field_tags': {'type': 'Text', 'help':'A comma delimited list of tags.'}
+        'field_statement': { title: 'Statement', type: 'TextArea'},
+        'field_code': {title: 'Code', type: 'TextArea'},
+        'field_readme':{title: 'Read me', type: 'TextArea'},
+        'field_tags': {title: 'Tags', 'type': 'Text', 'help':'A comma delimited list of tags.'}
       },
 
       validate: function(attrs, options) {
