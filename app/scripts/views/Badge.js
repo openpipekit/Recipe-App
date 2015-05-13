@@ -19,24 +19,22 @@ App.Views = App.Views || {};
 
         initialize: function () {
           this.$el.hide()
+          this.listenTo(this.model, 'change', this.render);
         },
 
         render: function () {
-          this.model.on('sync', function() {
-            this.$el.html(this.template())
-            if (this.model.get('uid') == 0) {
-              var badgeAnonymous = new App.Views.BadgeAnonymous({model: this.model})
-              this.$el.append(badgeAnonymous.el)
-              badgeAnonymous.render()
-            }
-            else {
-              var badgeSession = new App.Views.BadgeSession({model: this.model})
-              this.$el.append(badgeSession.el)
-              badgeSession.render()
-            }
-            this.$el.fadeIn()
-          }, this)
-          this.model.fetch()
+          this.$el.html(this.template())
+          if (this.model.get('uid') == 0) {
+            var badgeAnonymous = new App.Views.BadgeAnonymous({model: this.model})
+            this.$el.append(badgeAnonymous.el)
+            badgeAnonymous.render()
+          }
+          else {
+            var badgeSession = new App.Views.BadgeSession({model: this.model})
+            this.$el.append(badgeSession.el)
+            badgeSession.render()
+          }
+          this.$el.fadeIn()
         }
 
     });

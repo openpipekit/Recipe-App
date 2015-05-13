@@ -13,7 +13,8 @@ App.Routers = App.Routers || {};
         'recipe/:id/edit': 'recipeEdit',
         'recipe/:id': 'recipe',
         'login/register': 'loginRegister',
-        'search': 'search'
+        'search': 'search',
+        'account': 'account'
       },
 
       home: function() {
@@ -66,6 +67,13 @@ App.Routers = App.Routers || {};
         })
         $('.main').html(loginRegisterView.el)
         loginRegisterView.render()
+      },
+
+      account: function() {
+        var account = new App.Models.Account({uid: App.user.get('uid')})
+        var accountForm = new App.Views.AccountForm({model: account})
+        $('.main').html(accountForm.el)
+        account.fetch()
       }
 
 

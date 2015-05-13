@@ -17,7 +17,10 @@ window.App = {
     var badgeView = new App.Views.Badge({model: App.user})
     $('.header').prepend(badgeView.el)
     badgeView.render()
-    Backbone.history.start()
+    App.user.once('sync', function() {
+      Backbone.history.start()
+    })
+    App.user.fetch()
   },
   host: 'http://dev-mad-lib-robots.pantheon.io'
 }
